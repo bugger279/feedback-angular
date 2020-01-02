@@ -2,13 +2,13 @@
   <div class="container">
     <div class="row">
       <div class="col-md-6 mr-auto ml-auto">
-        <div class="feedbackList" *ngIf="yourFeedbacksData.length>0">
+        <div class="feedbackList" *ngIf="yourFeedbacksData?.length>0">
           <h2>Your Feedback</h2>
           <ul class="feedbacks">
             <li *ngFor="let yourFeedback of yourFeedbacksData">{{yourFeedback.feedback_data}}</li>
           </ul>
         </div>
-        <div class="feedbackList" *ngIf="yourFeedbacksData.length == 0 ">
+        <div class="feedbackList" *ngIf="yourFeedbacksData?.length == 0 || yourFeedbacksData == null ">
           <h2>No Feedbacks yet</h2>
         </div>
       </div>
@@ -19,8 +19,7 @@
   <div class="container">
     <div class="row">
       <div class="col-md-6 mr-auto ml-auto text-center">
-        <button type="button" (click)="getIds()" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Give
-          Feedback</button>
+      <button type="button" (click)="getIds()" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Give Feedback</button>
       </div>
     </div>
   </div>

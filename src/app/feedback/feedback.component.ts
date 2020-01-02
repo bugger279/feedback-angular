@@ -18,6 +18,7 @@ export class FeedbackComponent implements OnInit {
   constructor(private auth: AuthenticationService, private toastr: ToastrService) { }
 
   ngOnInit() {
+    console.log(this.yourFeedbacksData.length);
     this.auth.getFeedback().subscribe(
       (response) => {
         if (response.data === null) {
