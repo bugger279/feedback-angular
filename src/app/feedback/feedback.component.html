@@ -1,0 +1,56 @@
+<div class="my-feedbacks-container">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 mr-auto ml-auto">
+        <div class="feedbackList" *ngIf="yourFeedbacksData.length>0">
+          <h2>Your Feedback</h2>
+          <ul class="feedbacks">
+            <li *ngFor="let yourFeedback of yourFeedbacksData">{{yourFeedback.feedback_data}}</li>
+          </ul>
+        </div>
+        <div class="feedbackList" *ngIf="yourFeedbacksData.length == 0 ">
+          <h2>No Feedbacks yet</h2>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="giveFeedback">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 mr-auto ml-auto text-center">
+        <button type="button" (click)="getIds()" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Give
+          Feedback</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="myModalLabel">Give Feedback</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      </div>
+      <div class="modal-body" *ngIf="feedbackUsersList.length>0">
+        <div class="feedbackUserNames">
+          <form *ngFor="let userList of feedbackUsersList;let i =index">
+            <div class="form-group">
+              <label for="name">{{userList.receiver_name}}</label>
+              <input type="text" class="form-control" name="feedback_data" placeholder="Your Feedback" [(ngModel)]="userList.model">
+              <button class="btn btn-sm btn-primary" [disabled]="userList.isDisabled" (click)="submitReview(userList, i)">Submit</button>
+            </div>
+          </form>
+        </div>
+      </div>
+      <!--  -->
+      <div class="modal-body" *ngIf="feedbackUsersList.length == 0">
+        <div class="feedbackUserNames">
+          <p>No Users found or feedback already given.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
