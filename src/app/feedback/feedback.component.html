@@ -19,7 +19,8 @@
   <div class="container">
     <div class="row">
       <div class="col-md-6 mr-auto ml-auto text-center">
-      <button type="button" (click)="getIds()" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Give Feedback</button>
+        <button type="button" (click)="getIds()" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Give
+          Feedback</button>
       </div>
     </div>
   </div>
@@ -31,15 +32,32 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="myModalLabel">Give Feedback</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+            aria-hidden="true">&times;</span></button>
       </div>
       <div class="modal-body" *ngIf="feedbackUsersList.length>0">
         <div class="feedbackUserNames">
-          <form *ngFor="let userList of feedbackUsersList;let i =index">
+          <!-- <form *ngFor="let userList of feedbackUsersList;let i =index">
             <div class="form-group">
               <label for="name">{{userList.receiver_name}}</label>
               <input type="text" class="form-control" name="feedback_data" placeholder="Your Feedback" [(ngModel)]="userList.model">
               <button class="btn btn-sm btn-primary" [disabled]="userList.isDisabled" (click)="submitReview(userList, i)">Submit</button>
+            </div>
+          </form> -->
+          <form #form="ngForm" *ngFor="let userList of feedbackUsersList;let i =index" (ngSubmit)="submitReview()">
+            <div class="form-group">
+              <label for="name">{{userList.receiver_name}}</label>
+              <input type="text" class="form-control" name="feedback_data" #feedback_data="ngModel" placeholder="Your Feedback" minlength="15" [(ngModel)]="userList.model" required>
+              <div *ngIf="feedback_data.invalid && feedback_data.dirty" class="alert alert-danger">
+                <div *ngIf="feedback_data.errors.required">
+                  Feedback is required.
+                </div>
+                <div *ngIf="feedback_data.errors.minlength">
+                  Feedback must be at least 15 characters long.
+                </div>
+              </div>
+              <button class="btn btn-sm btn-primary"  [disabled]="userList.isDisabled || form.invalid"
+                (click)="submitReview(userList, i)">Submit</button>
             </div>
           </form>
         </div>
@@ -53,3 +71,4 @@
     </div>
   </div>
 </div>
+

@@ -44,7 +44,6 @@ export class FeedbackComponent implements OnInit {
           this.feedbackUsersList = response.data;
         } else {
           this.feedbackUsersList = response.data;
-          console.log(this.feedbackUsersList);
           this.feedbackUsersList['model'] = response.data._id;
           this.feedbackUsersList['isDisabled'] = false;
         }
@@ -58,12 +57,10 @@ export class FeedbackComponent implements OnInit {
   public submitReview(item, index) {
     this.auth.giveYourReview(item.receiver_id, item.model).subscribe(
       (response) => {
-        console.log(response);
         this.feedbackUsersList.splice(index, 1);
         this.toastr.info('', `Feedback given to: ${response.receiver_name}`);
       },
       (err) => {
-        console.log(err);
         this.toastr.warning(err.error.message);
       }
     );

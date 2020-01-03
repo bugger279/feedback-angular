@@ -6,3 +6,7 @@
 .feedbackUserNames .form-group > label { width: 30%; }
 .feedbackUserNames .form-group > input { width: 48%; margin: 0 1%; }
 .feedbackUserNames .form-group > button { width: 20%; }
+
+.feedbackUserNames .form-group { position: relative; }
+.feedbackUserNames .ng-invalid.ng-dirty .form-group { padding: 10px 10px 35px 10px; border: 1px solid #901c24; border-radius: 11px; }
+.feedbackUserNames .alert { position: absolute; background: top; border: 0; padding: 0; bottom: 0; margin: 0; }
